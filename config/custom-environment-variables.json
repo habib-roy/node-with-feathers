@@ -1,0 +1,14 @@
+{
+    "host": "HOST",
+    "port": "PORT",
+    "public": "PUBLIC",
+    "paginate": {
+        "__name": "PAGINATE",
+        "__format": "json"
+    },
+    "authentication": {
+        "__name": "AUTHENTICATION",
+        "__format": "json"
+    },
+    "mysql": "MYSQL"
+}
