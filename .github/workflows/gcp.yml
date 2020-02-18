@@ -17,8 +17,8 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  GKE_PROJECT: unique-sentinel-268604
-  GKE_EMAIL: habib.royni.mujtahid@gmail.com
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_EMAIL: ${{ secrets.GKE_EMAIL }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: asia-southeast1
   GKE_CLUSTER: gke-cluster
