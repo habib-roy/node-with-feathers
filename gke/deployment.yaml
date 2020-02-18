@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-with-feathers
+  labels:
+    app: api
+spec:
+  selector:
+    matchLabels:
+      app: node-with-feathers
+      tier: api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: node-with-feathers
+        tier: api
+    spec:
+      containers:
+      - name: api
+        image: $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
+        ports:
+        - containerPort: 3030
+        env:
+        - name: HOST
+          value: ${{ secrets.ENV_HOST }}
+        - name: PORT
+          value: ${{ secrets.ENV_PORT }}
+        - name: PUBLIC
+          value: ${{ secrets.ENV_PUBLIC }}
+        - name: PAGINATE
+          value: ${{ secrets.ENV_PAGINATE }}
+        - name: AUTHENTICATION
+          value: ${{ secrets.ENV_AUTHENTICATION }}
+        - name: MYSQL
+          value: ${{ secrets.ENV_MYSQL }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-with-feathers
+  labels:
+    app: api
+spec:
+  type: NodePort
+  selector:
+    app: node-with-feathers
+    tier: api
+  ports:
+  - port: 3030
+    targetPort: 3030

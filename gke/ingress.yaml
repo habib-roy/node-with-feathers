@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: node-with-feathers
+  annotations:
+    networking.gke.io/managed-certificates: nwf.semoga.online
+  labels:
+    app: node-with-feathers
+spec:
+  rules:
+  - host: nwf.semoga.online
+    http:
+      paths:
+      - backend:
+          serviceName: node-with-feathers
+          servicePort: 3030
+---
+apiVersion: networking.gke.io/v1beta1
+kind: ManagedCertificate
+metadata:
+  name: nwf.semoga.online
+  labels:
+    app: nwf
+spec:
+  domains:
+    - nwf.semoga.online
