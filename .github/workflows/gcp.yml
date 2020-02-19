@@ -64,6 +64,8 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+        chmod u+x ./gke/deployment.yaml
+        ./gke/deployment.yaml edit set image $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:${GITHUB_SHA}
         kubectl apply -f ./gke/deployment.yaml -f ./gke/ingress.yaml
         # kubectl rollout status deployment/$DEPLOYMENT_NAME
         # kubectl get services -o wide
