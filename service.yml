@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: node-with-feathers
+  name: ingress-node-with-feathers
   annotations:
     networking.gke.io/managed-certificates: nwf.semoga.online
   labels:
