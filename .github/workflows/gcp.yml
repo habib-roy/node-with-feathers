@@ -22,7 +22,7 @@ env:
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: asia-southeast1-a
   GKE_CLUSTER: gke-cluster
-  IMAGE: node-with-feathers-image
+  IMAGE: gke-test
   REGISTRY_HOSTNAME: gcr.io
   DEPLOYMENT_NAME: node-with-feathers
 
