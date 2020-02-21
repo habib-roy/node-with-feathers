@@ -47,11 +47,8 @@ jobs:
       env:
         LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
     
-    - name: Cek ENV $GKE_EMAIL
-      run: cat $GKE_EMAIL
-
     - name: Cek all ENV
-      run: env
+      run: printenv
 
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
