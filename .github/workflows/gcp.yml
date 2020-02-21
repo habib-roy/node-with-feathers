@@ -63,7 +63,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
-        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project /"$GKE_PROJECT"/"$IMAGE"
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project "$GKE_PROJECT"
         kubectl apply -f deployment.yml -f service.yml
         kubectl set env --all deployment/$DEPLOYMENT_NAME HOST=${{ secrets.ENV_HOST }} PORT=${{ secrets.ENV_PORT }} PUBLIC=${{ secrets.ENV_PUBLIC }} PAGINATE=|${{ secrets.ENV_PAGINATE }} AUTHENTICATION=|${{ secrets.ENV_AUTHENTICATION }} MYSQL=${{ secrets.ENV_MYSQL }} -o yaml
         kubectl set image -f deployment.yml api=$REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA -o yaml
