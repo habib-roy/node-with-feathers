@@ -74,5 +74,5 @@ jobs:
         kubectl apply -f deployment.yml -f service.yml
         kubectl set env --all deployment/"$GKE_DEPLOYMENT_NAME" HOST="$ENV_HOST" PORT="$ENV_PORT" PUBLIC="$ENV_PUBLIC" PAGINATE="$ENV_PAGINATE" AUTHENTICATION="$ENV_AUTHENTICATION" MYSQL="$ENV_MYSQL" -o yaml
         kubectl set image -f deployment.yml api="$REGISTRY_HOSTNAME"/"$GKE_PROJECT"/"$IMAGE_NAME":"$GITHUB_SHA" -o yaml
-        # kubectl rollout status deployment/"$GKE_DEPLOYMENT_NAME"
-        # kubectl get services -o wide
+        kubectl rollout status deployment/"$GKE_DEPLOYMENT_NAME"
+        kubectl get services -o wide
