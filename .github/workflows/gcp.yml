@@ -35,6 +35,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Decrypt large secret
+      run: ./secrets/decrypt.sh
+      env:
+        LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
+
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
@@ -59,7 +64,7 @@ jobs:
     - name: Publish
       run: |
         docker push $REGISTRY_HOSTNAME/$GKE_PROJECT/$IMAGE:$GITHUB_SHA
-        
+
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
